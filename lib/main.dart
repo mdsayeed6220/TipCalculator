@@ -59,7 +59,103 @@ class _BillState extends State<Bill> {
                     )
                   ],
                 ),
-              ))
+              )),
+          Container(
+            margin: EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: Colors.redAccent, style: BorderStyle.solid),
+                borderRadius: BorderRadius.circular((10.0))),
+            child: Column(
+              children: [
+                TextField(
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  style: TextStyle(color: Colors.red),
+                  decoration: InputDecoration(
+                      prefixText: "Bill Amount: ",
+                      prefixIcon: Icon(Icons.attach_money)),
+                  onChanged: (String value) {
+                    try {
+                      _billAmount = double.parse(value);
+                    } catch (e) {
+                      _billAmount = 0.0;
+                    }
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Split",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (_personCounter > 1) {
+                                _personCounter--;
+                              } else {
+                                // do nothing
+                              }
+                            });
+                          },
+                          child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Colors.red.shade400),
+                              child: Center(
+                                child: Text(
+                                  "-",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30.0),
+                                ),
+                              )),
+                        ),
+                        Text(
+                          "$_personCounter",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _personCounter++;
+                            });
+                          },
+                          child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.red.shade400,
+                                  borderRadius: BorderRadius.circular(20.0)),
+                              child: Center(
+                                child: Text(
+                                  "+",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                              )),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
