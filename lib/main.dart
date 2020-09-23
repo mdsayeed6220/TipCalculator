@@ -64,8 +64,7 @@ class _BillState extends State<Bill> {
             margin: EdgeInsets.only(top: 20.0),
             padding: EdgeInsets.all(12.0),
             decoration: BoxDecoration(
-                border: Border.all(
-                    color: Colors.redAccent, style: BorderStyle.solid),
+                border: Border.all(color: Colors.red, style: BorderStyle.solid),
                 borderRadius: BorderRadius.circular((10.0))),
             child: Column(
               children: [
@@ -88,7 +87,10 @@ class _BillState extends State<Bill> {
                   children: [
                     Text(
                       "Split",
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
                     ),
                     Row(
                       children: [
@@ -150,6 +152,26 @@ class _BillState extends State<Bill> {
                               )),
                         ),
                       ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Tip:",
+                      style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 20),
+                    
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "\$34",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0),
+                      ),
                     )
                   ],
                 )
