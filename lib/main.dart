@@ -10,8 +10,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 110),
+              child: Icon(Icons.whatshot),
+            )
+          ],
           title: Text("Tip Calculator"),
           backgroundColor: Colors.redAccent,
+          centerTitle: true,
         ),
         body: Bill(),
       ),
