@@ -33,7 +33,7 @@ class Bill extends StatefulWidget {
 
 class _BillState extends State<Bill> {
   int _tipPercetage = 0;
-  int _personCounter = 0;
+  int _personCounter = 1;
   double _billAmount = 0.0;
 
   @override
@@ -51,7 +51,7 @@ class _BillState extends State<Bill> {
               height: 150,
               decoration: BoxDecoration(
                   color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(12.0)),
+                  borderRadius: BorderRadius.circular(15.0)),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +66,7 @@ class _BillState extends State<Bill> {
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
                       child: Text(
-                        "₹ ${calculateValue(_billAmount, _personCounter, _tipPercetage)} INR",
+                        "₹ ${calculateTotalPerson(_billAmount, _personCounter, _tipPercetage)} INR",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -223,10 +223,10 @@ class _BillState extends State<Bill> {
     );
   }
 
-  calculateValue(double billAmount, int splitBy, int tipPercentage) {
+  calculateTotalPerson(double billAmount, int splitBy, int tipPercentage) {
     var totalPerPerson =
         (calculateTotaltip(billAmount, splitBy, tipPercentage) + billAmount) /
-            splitBy;
+            (splitBy * 72);
 
     return totalPerPerson.toStringAsFixed(2);
   }
