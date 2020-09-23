@@ -25,7 +25,7 @@ class Bill extends StatefulWidget {
 }
 
 class _BillState extends State<Bill> {
-  int _tipCalculator = 0;
+  int _tipPercetage = 0;
   int _personCounter = 1;
   double _billAmount = 0.0;
 
@@ -51,11 +51,20 @@ class _BillState extends State<Bill> {
                   children: [
                     Text(
                       "Total Per Person",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0),
                     ),
-                    Text(
-                      "123",
-                      style: TextStyle(color: Colors.white),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "\$123",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 35.0),
+                      ),
                     )
                   ],
                 ),
@@ -160,8 +169,10 @@ class _BillState extends State<Bill> {
                   children: [
                     Text(
                       "Tip:",
-                      style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 20),
-                    
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
@@ -173,6 +184,29 @@ class _BillState extends State<Bill> {
                             fontSize: 17.0),
                       ),
                     )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "$_tipPercetage%",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
+                    ),
+                    Slider(
+                        min: 0,
+                        max: 100,
+                        activeColor: Colors.red,
+                        inactiveColor: Colors.red.shade100,
+                        divisions: 5,
+                        value: _tipPercetage.toDouble(),
+                        onChanged: (double value) {
+                          setState(() {
+                            _tipPercetage = value.round();
+                          });
+                        })
                   ],
                 )
               ],
