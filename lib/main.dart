@@ -33,7 +33,7 @@ class Bill extends StatefulWidget {
 
 class _BillState extends State<Bill> {
   int _tipPercetage = 0;
-  int _personCounter = 1;
+  int _personCounter = 0;
   double _billAmount = 0.0;
 
   @override
@@ -61,16 +61,16 @@ class _BillState extends State<Bill> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 15.0),
+                          fontSize: 20.0),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
                       child: Text(
-                        "\$123",
+                        "₹ ${calculateValue(_billAmount, _personCounter, _tipPercetage)} INR",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 35.0),
+                            fontSize: 30.0),
                       ),
                     )
                   ],
@@ -147,7 +147,7 @@ class _BillState extends State<Bill> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _personCounter++;
+                              _personCounter += 1;
                             });
                           },
                           child: Container(
@@ -184,7 +184,7 @@ class _BillState extends State<Bill> {
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "\$34",
+                        "\₹ ${calculateTotaltip(_billAmount, _personCounter, _tipPercetage)}",
                         style: TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
@@ -207,7 +207,6 @@ class _BillState extends State<Bill> {
                         max: 100,
                         activeColor: Colors.red,
                         inactiveColor: Colors.red.shade100,
-                        divisions: 5,
                         value: _tipPercetage.toDouble(),
                         onChanged: (double value) {
                           setState(() {
@@ -222,5 +221,22 @@ class _BillState extends State<Bill> {
         ],
       ),
     );
+  }
+
+  calculateValue(double billAmount, int splitBy, int tipPercentage) {
+    var totalPerPerson =
+        (calculateTotaltip(billAmount, splitBy, tipPercentage) + billAmount) /
+            splitBy;
+
+    return totalPerPerson.toStringAsFixed(2);
+  }
+
+  calculateTotaltip(double billAmount, int splitBy, int tipPercentage) {
+    double totalTip = 0.0;
+    if (billAmount < 0 || billAmount.toString().isEmpty || billAmount == null) {
+    } else {
+      totalTip = (billAmount * tipPercentage) / 100;
+      return totalTip;
+    }
   }
 }
